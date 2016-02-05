@@ -52,8 +52,8 @@ class Book{
         if($result !== false) {
             if($result->num_rows>0) {
                 while($row = $result->fetch_assoc()){
-                    $book = new Book($row['id'], $row['nazwa'], $row['autor'], $row['opis']);
-                    $ret[] = $book;
+                   // $book = new Book($row['id'], $row['nazwa'], $row['autor'], $row['opis']);
+                    $ret[] = $row;
                 }
             }
         }
