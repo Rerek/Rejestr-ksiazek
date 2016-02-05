@@ -13,10 +13,10 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (result) {
                 console.log(result);
-
-                $('#nazwa').html(result[0].nazwa);
-                $('#autor').html(result[1].autor);
-                $('#opis').html(result[2].opis);
+                for(var i=0; i<result.length; i++) {
+                    var newLi = $("<li> Tytuł: " + result[i].nazwa + " Autor: " + result[i].autor + " opis: " + result[i].opis + "</li>");
+                    $('ul').prepend(newLi);
+                }
             },
             error: function () {
                 console.log('Wystąpił błąd.'); //to wyświetli się jak jest błąd
