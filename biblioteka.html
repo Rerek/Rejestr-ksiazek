@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <link rel="stylesheet" href="style.css"></link>
     <script src="api/js/script.js"></script>
 
 </head>
 <body>
 
-<button class="pobieranieKsiazek">POBIERZ Książki</button>
 
-<ul>
+<form>
+    <fieldset>
+        <h2>Dodaj nową książkę</h2>
+        <p>Tytuł:</p>
+        <p><input type="text" name="tytul" size="40"></p>
+        <p>Autor:</p>
+        <p><input type="text" name="autor" size="40"></p>
+        <p>Opis:</p>
+        <p><textarea type="text" name="opis" cols="50" rows="8"></textarea></p>
+        <button type="submit" class="add">Dodaj</button>
+    </fieldset>
+</form>
 
-</ul>
+<p>
+    <button class="pobieranieKsiazek">POBIERZ Książki</button>
+</p>
+
+<h2>Książki</h2>
+<div id="listOfBooks">
+
+</div>
 </body>
 </html>
