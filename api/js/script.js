@@ -76,25 +76,28 @@ $(document).ready(function MTest() {
                                 e.preventDefault();
                                 e.stopPropagation();
 
-                                var newTitle = $('input[name=newTitleForm]').val();
-                                var newAuthor = $('input[name=newAuthorForm]').val();
-                                var newDescribe = $('textarea[name=newDescribeForm]').val();
-                                var idOfChange = $(this).closest('div.title').attr('id');
-
-                                $.ajax({                            //UPDATE!!!!!!
-                                    url: './api/js/test.php/',
-                                    type: 'PUT',
-                                    data: 'newId=' + idOfChange + '&newTitle=' + newTitle + '&newAuthor=' + newAuthor + '&newDescribe=' + newDescribe,
-                                    success: function () {
-                                        MTest();
-                                    },
-                                    error: function () {
-                                        console.log('Wystąpił błądtuuuutaj.'); //to wyświetli się jak jest błąd
-                                    },
-                                    complete: function () {
-                                        console.log('zakończono request'); //to jest wykonywane zawsze
-                                    }
-                                });
+                                var newTitle = ($('input[name=newTitleForm]').val()).trim();
+                                var newAuthor = ($('input[name=newAuthorForm]').val()).trim();
+                                var newDescribe = ($('textarea[name=newDescribeForm]').val()).trim();
+                                var idOfChange = ($(this).closest('div.title').attr('id')).trim();
+                                if(!(newTitle.length<2)) {
+                                    $.ajax({                            //UPDATE!!!!!!
+                                        url: './api/js/test.php/',
+                                        type: 'PUT',
+                                        data: 'newId=' + idOfChange + '&newTitle=' + newTitle + '&newAuthor=' + newAuthor + '&newDescribe=' + newDescribe,
+                                        success: function () {
+                                            MTest();
+                                        },
+                                        error: function () {
+                                            console.log('Wystąpił błądtuuuutaj.'); //to wyświetli się jak jest błąd
+                                        },
+                                        complete: function () {
+                                            console.log('zakończono request'); //to jest wykonywane zawsze
+                                        }
+                                    });
+                                }else{
+                                    alert("Za krótki tytuł książki!!!");
+                                }
                             })
                         },
                         error: function () {
