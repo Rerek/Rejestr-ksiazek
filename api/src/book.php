@@ -14,6 +14,12 @@ class Book
 
     static public function Create($nazwa, $autor, $opis)
     {
+        if (strlen($autor) < 1) {
+            $autor = '(brak)';
+        }
+        if (strlen($opis) < 1) {
+            $opis = '(brak)';
+        }
         $sql = "INSERT INTO books(nazwa, autor, opis)
                 VALUES ('$nazwa', '$autor', '$opis')";
         $result = self::$connection->query($sql);
@@ -27,7 +33,7 @@ class Book
     static public function loadAllBooks()
     {
         $ret = [];
-        $sql = "SELECT * FROM books";
+        $sql = "SELECT id, nazwa FROM books";
         $result = self::$connection->query($sql);
         if ($result !== false) {
             if ($result->num_rows > 0) {
@@ -46,12 +52,30 @@ class Book
         $result = self::$connection->query($sql);
         if ($result !== false) {
             if ($result->num_rows == 1) {
-               while($row = $result->fetch_assoc()){
-                   $book = $row;
+                while ($row = $result->fetch_assoc()) {
+                    $book = $row;
                 }
             }
         }
         return $book;
+    }
+
+    static public function DeleteBookFromDb($id)
+    {
+        $sql = "DELETE FROM books WHERE id = $id";
+        $result = self::$connection->query($sql);
+        if ($result == false) {
+            return false;
+        }
+    }
+
+    static public function UpdateBookToDb($id, $name, $author, $describe)
+    {
+        $sql = "UPDATE books SET nazwa='$name', autor='$author', opis='$describe' WHERE id = $id";
+        $result = self::$connection->query($sql);
+        if ($result == false) {
+            return false;
+        }
     }
 
     private $id;
@@ -102,7 +126,10 @@ class Book
     {
         return $this->opis;
     }
-
+//    public function __destruct()
+//    {
+//
+//    }
 
 }
 
