@@ -4,7 +4,7 @@
 
 $(document).ready(function MTest() {
     $.ajax({
-        url: './api/js/test.php',
+        url: './api/test.php',
         type: 'GET', //pobierz metodą get
         dataType: 'json',
         success: function (result) {     //wczytuje wszystkie tytuły z bazy danych
@@ -18,13 +18,13 @@ $(document).ready(function MTest() {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                var idDoUsuniecia = ($(this).closest('.title').attr('id'));
+                var idToDelete = ($(this).closest('.title').attr('id'));
                 $.ajax({                            //usuwanie!!!!!!
-                    url: './api/js/test.php/',
+                    url: './api/test.php/',
                     type: 'DELETE',
-                    data: 'id=' + idDoUsuniecia,
+                    data: 'id=' + idToDelete,
                     success: function () {
-                        console.log('usunięto' + idDoUsuniecia);
+                        console.log('usunięto' + idToDelete);
                         MTest();
                     },
                     error: function () {
@@ -47,7 +47,7 @@ $(document).ready(function MTest() {
                 if (opis.hasClass('desc')) {
                     $(this).html('Mniej szczegółów');  //zmiana napisu na przycisku
                     $.ajax({
-                        url: './api/js/test.php?id=' + idtytulu,
+                        url: './api/test.php?id=' + idtytulu,
                         type: 'GET', //pobierz metodą get
                         dataType: 'json',
                         success: function (result) {
@@ -82,7 +82,7 @@ $(document).ready(function MTest() {
                                 var idOfChange = ($(this).closest('div.title').attr('id')).trim();
                                 if(!(newTitle.length<2)) {
                                     $.ajax({                            //UPDATE!!!!!!
-                                        url: './api/js/test.php/',
+                                        url: './api/test.php/',
                                         type: 'PUT',
                                         data: 'newId=' + idOfChange + '&newTitle=' + newTitle + '&newAuthor=' + newAuthor + '&newDescribe=' + newDescribe,
                                         success: function () {
@@ -145,7 +145,7 @@ $(document).ready(function MTest() {
             dataToSend.opis = opisForm;
 
             $.ajax({
-                url: './api/js/test.php',
+                url: './api/test.php',
                 type: 'POST',
                 data: dataToSend,
                 dataType: 'json',

@@ -1,5 +1,5 @@
 <?php
-require_once("../src/connectPHP.php");
+require_once("./src/connectPHP.php");
 
 
 
@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
 
     parse_str(file_get_contents("php://input"),$del_vars);
-    $usun = Book::DeleteBookFromDb($del_vars['id']);
+    $delete = Book::DeleteBookFromDb($del_vars['id']);
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'PUT'){

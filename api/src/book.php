@@ -71,6 +71,12 @@ class Book
 
     static public function UpdateBookToDb($id, $name, $author, $describe)
     {
+        if (strlen($author) < 1) {
+            $author = '(brak)';
+        }
+        if (strlen($describe) < 1) {
+            $describe = '(brak)';
+        }
         $sql = "UPDATE books SET nazwa='$name', autor='$author', opis='$describe' WHERE id = $id";
         $result = self::$connection->query($sql);
         if ($result == false) {
@@ -126,11 +132,6 @@ class Book
     {
         return $this->opis;
     }
-//    public function __destruct()
-//    {
-//
-//    }
-
 }
 
 
