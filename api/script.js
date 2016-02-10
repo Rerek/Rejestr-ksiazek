@@ -14,11 +14,15 @@ $(document).ready(function MTest() {
                 var newBook = $("<div class='title' id=" + result[i].id + "><h2>" + result[i].nazwa + "</h2><button type=submit class=del>Usuń</button><button type=submit class=moreDesc>Szczegóły</button><div class='desc'></div></div>");
                 $('#listOfBooks').prepend(newBook);
             }
-            $('.del').one('click', function (e) {      //usuwanie , poprawić!!!!
+            $('.del').one('click', function (e) {      //usuwanie ,!!!!
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
                 var idToDelete = ($(this).closest('.title').attr('id'));
+
+                if (idToDelete == 666){
+                    alert("NIE MOŻNA USUNĄĆ, TA KSIĄŻKA JEST ZAKAZANA!");
+                }else{
                 $.ajax({                            //usuwanie!!!!!!
                     url: './api/test.php/',
                     type: 'DELETE',
@@ -34,7 +38,7 @@ $(document).ready(function MTest() {
                         console.log('zakończono request'); //to jest wykonywane zawsze
                     }
                 });
-
+                }
             });
 
             //wysuwa diva ze szczegółami o książce
@@ -44,7 +48,9 @@ $(document).ready(function MTest() {
                 var idtytulu = $(this).closest('div').attr('id');
                 var opis = $(this).closest('div').find("div");
 
-                if (opis.hasClass('desc')) {
+                if (idtytulu == 666){
+                    alert("NIE WOLNO ODCZYTAĆ INFORMACJI, TA KSIĄŻKA JEST ZAKAZANA!");
+                }else if (opis.hasClass('desc')) {
                     $(this).html('Mniej szczegółów');  //zmiana napisu na przycisku
                     $.ajax({
                         url: './api/test.php?id=' + idtytulu,
